@@ -1,0 +1,82 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container">
+  <!--Displays components on main screen-->
+  <div *ngIf="showMainScreen">
+    <h1 class="appStyle">MCQ App</h1>
+    <p class="textStyle"><b>Welcome!</b> Get ready to test yourself with a basic multiple choice questions quiz in different categories.</p>
+    <button (click)="showCategoryScreen($event)" class="button">Get Started</button>
+    <button (click)="showThankYouScreen($event)" class="button">Exit</button>
+  </div>
+
+  <!--Displays components on end screen-->
+  <div *ngIf="thankYouScreen">
+    <p class="textStyle">Thank You for playing the quiz!</p>
+    <button (click)="showFirstScreen($event)" class="button">Play Again</button>
+  </div>
+
+  <!--Displays components on categories screen-->
+  <div *ngIf="showCategories">
+    <p class="textStyle"><b>Categories:</b></p>
+    <button (click)="displayQuestions($event, 'All')" class="button" style="width: 280px; height: auto">All</button>
+    <br>
+
+    <ng-container *ngFor="let i of listOfCategories">
+      <button (click)="displayQuestions($event, i)" class="button" style="width: 280px; height: auto">{{i}}</button>
+      <br>
+    </ng-container>
+    <br><br>
+
+    <p class="textStyle"><b>Score:</b></p>
+    <button (click)="showScoreGraph($event)" class="button" style="width: 280px; height: auto">Score History</button>
+    <br><br>
+    <button (click)="showFirstScreen($event)" style="width: 280px; height: auto" class="button"> < Back</button>
+  </div>
+
+  <div *ngIf="showQuestions">
+    <div *ngIf="index != 0" style="text-align:justify" class="textStyle">Q.{{index}}/{{totalQues}}</div><br>
+    <div style="text-align:justify" class="textStyle"> {{quest}}</div><br>
+    <ng-container *ngFor="let i of listOfAnswers">
+      <div style="text-align:left">
+        <span *ngIf="isAnswered">
+          <span *ngIf="answ == i">
+            <input style="text-align:left" type="radio" name="answer" checked=true [value]="i" (change)="storeAnswers($event, quest)">
+          </span>
+          <span *ngIf="answ != i">
+            <input style="text-align:left" type="radio" name="answer" [value]="i" (change)="storeAnswers($event, quest)">
+          </span>
+        </span>
+        <span *ngIf="(!isAnswered)">
+          <input style="text-align:left" type="radio" name="answer" [value]="i" (change)="storeAnswers($event, quest)">
+        </span>
+        <label style="text-align:left" class="textStyle">{{i}}</label>
+      </div>
+    </ng-container>
+    <br>
+    <br>
+
+    <button *ngIf="showBack" (click)="showPrevQuestion($event)" class="button"> < Back</button>
+    <button *ngIf="showNext" (click)="showNextQuestion($event)" class="button">Next ></button>
+    <button *ngIf="showNext || showFinish" (click)="showHomeScreen($event)" class="button">Quit</button>
+  </div>
+
+  <!--Displays submit button at last question screen-->
+  <div *ngIf="showFinish">
+    <button (click)="showScore($event)" class="button">Submit</button>
+  </div>
+
+  <!--Displays components on end screen-->
+  <div *ngIf="showEndScreen">
+    <div class="textStyle circle"><p style="padding-top: 18px; font-size: 22px;">{{score}}/{{totalQues}}</p></div><br><br>
+    <button (click)="showScoreGraph($event)" class="button">Score History</button>
+    <button (click)="showHomeScreen($event)" class="button">Go to Home Screen</button>
+    <button (click)="restartQuiz($event)" class="button">Restart Quiz</button>
+  </div>
+
+  <div class="graph">
+    <canvas #bar class="chart"></canvas>
+    <br><br><br><br>
+    <div *ngIf="showHomeButton">
+      <button (click)="showHomeScreen($event)" class="button">Go to Home Screen</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+/*styling for buttons*/
+.button {
+    background-color: #5e3b70;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;  
+  }
+
+  /*styling for main div element*/
+  .container {
+    margin-left: auto; 
+    margin-right: auto;
+    padding-top: 10vh;
+    text-align:center; 
+    width:700px;  
+  }
+
+  /*styling for all the text*/
+  .textStyle {
+    color: #5e3b70;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+  }
+
+  /*styling for all the text of App Name*/
+  .appStyle {
+    color: #5e3b70;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  /*styling for all the score display*/
+  .circle {
+    border:5px solid #5e3b70;    
+    border-radius:50%;
+    display: inline-block;
+    font-size: 16px;
+    height:100px;
+    margin: auto; 
+    padding: 15px 32px;
+    width: 70px; 
+  }
+
+  /*styling for mobile screens*/
+  @media screen and (max-width: 700px) { 
+      .button {
+        display: list-item;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .container {
+        padding: 5px;
+        width: 350px;
+      }
+  }
